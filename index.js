@@ -6,8 +6,6 @@ module.exports = RandomAccessAlias;
 function RandomAccessAlias(resolver, storage) {
   // Default to random access file storage
   if (!storage) storage = raf;
-  // Cache to store recently resolved filenames to speed up retrieval of commonly references.
-  const cache = lru(128);
   return (filename, options) => {
     // Queue to keep track of all operations on storage before name has been resolved;
     let queue = [];
@@ -21,10 +19,6 @@ function RandomAccessAlias(resolver, storage) {
       });
       queue = [];
     };
-    // if filename is already in cache return storage without proxy.
-    if (cache.get(filename)) {
-      return storage(cache.get(filename));
-    }
     // Resolve filename alias
     Promise.resolve(resolver(filename))
       .then(realName => {
@@ -33,8 +27,6 @@ function RandomAccessAlias(resolver, storage) {
             "Invalid Filename alias. Alias must be non-empty string"
           );
         }
-        // Save to cache
-        cache.set(filename, realName);
         store = storage(realName, options);
         flushDeferredMethods();
       })
