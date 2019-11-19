@@ -1,8 +1,12 @@
 {
   "name": "random-access-alias",
   "version": "0.0.1",
-  "description": "",
+  "description": "Creates aliased versions of random-access-storage compatible storage interfaces.",
   "main": "index.js",
+  "keywords": [
+    "random-access-storage",
+    "alias"
+  ],
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch"
