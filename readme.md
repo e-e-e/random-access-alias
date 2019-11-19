@@ -1,5 +1,7 @@
 # Random Access Alias
 
+[![Build Status](https://travis-ci.org/e-e-e/random-access-alias.svg?branch=master)](https://travis-ci.org/e-e-e/random-access-alias)
+
 A proxy wrapper for any [random-access-storage](https://github.com/random-access-storage/random-access-storage) compatible store which allows aliased mapping of filenames.
 
 This is useful for creating virtual file structures without having to change any directory structures on disk, or duplicate shared files.
